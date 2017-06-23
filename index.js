@@ -115,5 +115,7 @@ schedule.scheduleJob('0 30 */2 * * *', () => {
     // should average out to twice a day
     if(Math.random() < 0.3) {
         process().catch(e => log(e));
+    } else {
+        log("Didn't tweet");
     }
 });
