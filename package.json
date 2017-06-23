@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Tom McLean <tom.a.mclean@gmail.com>",
+  "scripts": {
+    "start": "forever start -a --uid hotbeverage index.js"
+  },
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.1",
