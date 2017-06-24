@@ -9,12 +9,6 @@ var bot = new Twitterbot(config.get('twitterbot'));
 var quote = require('./quote');
 var store = require('./store');
 
-var request_ = function() {
-    return Promise.resolve({
-        text: '(S I/PRP think/NN ,/, therefore/RB I/NNS am/VBP)'
-    });
-};
-
 function getQuote() {
     return quote.get();
 }
