@@ -10,11 +10,8 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.1",
     "config": "^1.26.1",
-    "form-data": "^2.2.0",
     "mcccclean-twitterbot": "^2.3.0",
     "nedb-promise": "^2.0.1",
-    "node-fetch": "^1.7.1",
-    "node-schedule": "^1.2.3",
     "pretty-good-log": "^1.1.0",
     "request-promise": "^4.2.1",
     "string-hash": "^1.1.3"

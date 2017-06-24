@@ -1,7 +1,6 @@
 var request = require('request-promise');
 var config = require('config');
 var log = require('pretty-good-log')('main');
-var schedule = require('node-schedule');
 
 var Twitterbot = require('mcccclean-twitterbot');
 var bot = new Twitterbot(config.get('twitterbot'));
@@ -104,12 +103,19 @@ function process() {
 }
 
 
-schedule.scheduleJob('0 30 */2 * * *', () => {
-    // 30% chance of tweeting, once every 4 hours
-    // should average out to twice a day
-    if(Math.random() < 0.3) {
-        process().catch(e => log(e));
-    } else {
-        log("Didn't tweet");
-    }
-});
+var HOUR = 60 * 60 * 1000;
+var DIFF = config.max - config.min;
+var MIN = config.min;
+
+function run() {
+    process()
+        .catch(e => log(e))
+        .then(() => {
+            var interval = Math.random() * DIFF + MIN;
+            log('I will tweet again in', interval.toFixed(2), 'hours');
+            setTimeout(run, interval * HOUR);
+        });
+}
+
+run();
+
