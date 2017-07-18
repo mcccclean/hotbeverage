@@ -104,13 +104,20 @@ var HOUR = 60 * 60 * 1000;
 var DIFF = config.max - config.min;
 var MIN = config.min;
 
+function repeat(min, diff) {
+    var interval = Math.random() * diff + min;
+    log('I will tweet again in', interval.toFixed(2), 'hours');
+    setTimeout(run, interval * HOUR);
+}
+
 function run() {
     process()
-        .catch(e => log(e))
         .then(() => {
-            var interval = Math.random() * DIFF + MIN;
-            log('I will tweet again in', interval.toFixed(2), 'hours');
-            setTimeout(run, interval * HOUR);
+            repeat(MIN, DIFF);
+        })
+        .catch(e => {
+            log(e);
+            repeat(0.1, 0);
         });
 }
 
