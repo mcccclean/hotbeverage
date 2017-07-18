@@ -69,7 +69,7 @@ function replaceWithEmoji(taggedQuote, emoji) {
         type: null
     });
 
-    var newText = taggedQuote.text.replace(chosen.word, character);
+    var newText = taggedQuote.text.replace(new RegExp(chosen.word, 'g'), character);
 
     return Object.assign({}, taggedQuote, { 
         parts: newParts,
@@ -79,18 +79,15 @@ function replaceWithEmoji(taggedQuote, emoji) {
 
 function tweet(quote) {
     var candidate = `"${quote.text}" – ${quote.author}`;
-    return store.flag(quote._id)
-        .then(() => {
-            log(candidate);
-            if(candidate.length <= 140) {
-                // actually tweet it
-                bot.tweet(candidate);
-                return true;
-            } else {
-                log.warn('too long');
-                return false;
-            }
-        });
+    log(candidate);
+    if(candidate.length <= 140) {
+        // actually tweet it
+        bot.tweet(candidate);
+        return true;
+    } else {
+        log.warn('too long');
+        return false;
+    }
 }
 
 function process() {

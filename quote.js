@@ -46,7 +46,10 @@ function get() {
                 return populateStore()
                     .then(() => store.getTopTweet());
             }
-        });
+        })
+        .then(quote => {
+            return store.flag(quote._id).then(() => quote);
+        })
 }
 
 module.exports = { get };
